@@ -10,6 +10,7 @@ export const Logout = (props) => {
       props.onLogoutButtonClick(true);
     } catch(err) {
       console.log(err.message);
+      window.alert(err.message);
     };
   };
   return (

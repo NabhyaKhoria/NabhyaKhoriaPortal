@@ -36,6 +36,8 @@ export const LoginForm = (props) => {
       props.onLogin();
     } catch (err) {
       console.log(err);
+      window.alert(err.message);
+      return;
     }
     return;
     // props.onAddToCart(enteredAmountNumber);

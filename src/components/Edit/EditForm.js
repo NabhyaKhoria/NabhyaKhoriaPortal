@@ -34,7 +34,9 @@ export const EditForm = (props) => {
       await editProfile(enteredPhoto, enteredUsername);
       props.onLogin();
     } catch (err) {
+      window.alert(err.message);
       console.log(err);
+      return;
     }
     // authCtx.onLogin();
     props.onEdit();

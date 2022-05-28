@@ -49,7 +49,9 @@ export const RegistrationForm = (props) => {
     try{
       await signUp(enteredEmail, enteredPassword);
     } catch(err) {
+      window.alert(err.message);
       console.log(err);
+      return;
     };
     // try {
     //   await authCtx.signup(
