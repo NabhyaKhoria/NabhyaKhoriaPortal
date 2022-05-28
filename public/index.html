@@ -24,20 +24,140 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cabin:wght@500&display=swap");
+
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        background: hsl(0, 0%, 0%);
+      }
+      .svg-logo{
+        color: hsl(0, 0%, 100%);
+
+      }
+      svg {
+        display: block;
+        width: 100vw;
+        max-width: 35rem;
+        height: auto;
+      }
+      svg text {
+        font-family: "Cabin", sans-serif;
+        font-weight: 500;
+      }
+    </style>
     <title>React App</title>
   </head>
   <body>
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v14.0" nonce="MHJ4m44d"></script>
+    <div class="svg-logo">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="-75 0 250 82.5"
+      width="500"
+      height="165"
+    >
+      <defs>
+        <path
+          id="path-foreground"
+          d="M 0 65 a 200 200 0 0 1 150 -65 160 160 0 0 0 -125 65"
+        />
+        <path id="path-background" d="M 60 65 l -60 -45 h 22.5 l 60 45 z" />
+
+        <!-- mask for the logo -->
+        <mask id="mask-path">
+          <rect width="150" height="100" fill="hsl(0, 0%, 100%)" />
+          <g fill="hsl(0, 0%, 0%)">
+            <use transform="translate(-3.5 -3.5)" href="#path-foreground" />
+            <use transform="translate(3 3)" href="#path-foreground" />
+          </g>
+        </mask>
+
+        <!-- mask(s) purely for the animation -->
+        <mask id="mask-path-foreground">
+          <rect width="150" height="100" fill="hsl(0, 0%, 100%)" />
+          <g fill="hsl(0, 0%, 0%)">
+            <g transform="translate(150 0)">
+              <circle transform="scale(0)" r="175" />
+            </g>
+          </g>
+        </mask>
+
+        <mask id="mask-path-background">
+          <rect width="150" height="100" fill="hsl(0, 0%, 100%)" />
+          <g fill="hsl(0, 0%, 0%)">
+            <circle transform="scale(0)" r="125" />
+          </g>
+        </mask>
+      </defs>
+
+      <g fill="currentColor" stroke="none">
+        <g mask="url(#mask-path-background)">
+          <g mask="url(#mask-path)">
+            <use href="#path-background" />
+          </g>
+        </g>
+        <g mask="url(#mask-path-foreground)">
+          <use href="#path-foreground" />
+        </g>
+        <g transform="translate(0 82.5)">
+          <text
+            textLength="82.5"
+            style="text-transform: uppercase; font-size: 0.8rem"
+          >
+            NABHYA
+          </text>
+        </g>
+      </g>
+    </svg>
+  </div>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    const { matches } = window.matchMedia("prefers-reduced-motion: reduce");
+
+    if (!matches) {
+      const text = document.querySelector("svg text");
+      const textLength = text.getAttribute("textLength");
+      text.innerHTML = text.textContent
+        .split("")
+        .map((letter) => `<tspan textLength="${textLength}">${letter}</tspan>`)
+        .join("");
+
+      const animation = anime.timeline();
+
+      animation.add({
+        targets: "text tspan",
+        opacity: [0, 1],
+        duration: 425,
+        easing: "easeInOutQuad",
+        delay: (d, i) => 150 * i + 500,
+      });
+
+      animation.add(
+        {
+          targets: "mask circle",
+          scale: [1, 0],
+          duration: 2000,
+          easing: "easeInOutSine",
+        },
+        500
+      );
+
+      window.addEventListener("click", () => animation.restart());
+    }
+  </script>
 </html>

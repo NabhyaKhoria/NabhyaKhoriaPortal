@@ -1,0 +1,28 @@
+.input {
+  /* display: flex; */
+  align-items: center;
+  margin-bottom: 0.5rem;
+  /* flex-direction: row; */
+  margin-top:7%;
+  margin-left:2rem;
+  
+}
+
+.input label {
+  margin-right: 1rem;
+  font-size: 1.3rem;
+}
+
+.input input {
+  margin-top: 2%;
+  width: 90%;
+  height: 2rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font: inherit;
+  padding-left: 0.5rem;
+}
+
+.invalid {
+    border: 2px solid red !important;
+}
