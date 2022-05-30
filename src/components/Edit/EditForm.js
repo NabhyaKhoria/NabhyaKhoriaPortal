@@ -32,13 +32,13 @@ export const EditForm = (props) => {
     }
     try {
       await editProfile(enteredPhoto, enteredUsername);
-      props.onLogin();
     } catch (err) {
       window.alert(err.message);
       console.log(err);
       return;
     }
     // authCtx.onLogin();
+    window.alert('Your Profile Picture will be updated soon!');
     props.onEdit();
     return;
   };
@@ -49,7 +49,7 @@ export const EditForm = (props) => {
           <Input
             ref={inputPhotoRef}
             isValid={inputPhotoValid}
-            label="Profile Photo URL"
+            label="Profile Photo URL (default image will be used otherwise)"
             input={{
               id: "photoURL",
               type: "url",

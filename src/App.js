@@ -38,7 +38,6 @@ function App() {
   };
   const onEditHandler = () => {
     setEditOpen(false);  
-    window.alert('Your Profile Picture will be updated soon!');
     document.getElementById("home-section").style.display = "block";
   };
   const onLogoutButtonClickHandler = async () => {
